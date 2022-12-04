@@ -26,7 +26,60 @@ class Game extends React.Component<GameProps, GameState> {
   initializeGame = () => {
     const { players } = this.props;
     // Initialize deck of cards
-    const deck: string[] = [];
+    const deck: string[] = [
+      "A♠",
+      "2♠",
+      "3♠",
+      "4♠",
+      "5♠",
+      "6♠",
+      "7♠",
+      "8♠",
+      "9♠",
+      "10♠",
+      "J♠",
+      "Q♠",
+      "K♠",
+      "A♥",
+      "2♥",
+      "3♥",
+      "4♥",
+      "5♥",
+      "6♥",
+      "7♥",
+      "8♥",
+      "9♥",
+      "10♥",
+      "J♥",
+      "Q♥",
+      "K♥",
+      "A♣",
+      "2♣",
+      "3♣",
+      "4♣",
+      "5♣",
+      "6♣",
+      "7♣",
+      "8♣",
+      "9♣",
+      "10♣",
+      "J♣",
+      "Q♣",
+      "K♣",
+      "A♦",
+      "2♦",
+      "3♦",
+      "4♦",
+      "5♦",
+      "6♦",
+      "7♦",
+      "8♦",
+      "9♦",
+      "10♦",
+      "J♦",
+      "Q♦",
+      "K♦",
+    ];
     // Initialize hands for each player
     const hands: string[][] = [];
 
@@ -36,6 +89,7 @@ class Game extends React.Component<GameProps, GameState> {
 
     this.setState({ deck, hands, status: "running" });
   };
+
 
   dealCards = () => {
     // Deal cards to each player
