@@ -23,11 +23,18 @@ You can check the full conversion in [chat.pdf](chat.pdf). I also exported the p
 
 First version
 
-<video src="docs/demo1.mov" controls="controls" style="max-width: 730px;"></video>
+
+
+https://user-images.githubusercontent.com/1232405/205486960-cd1d9384-d318-4c90-9385-4b2467752e4a.mov
+
 
 Second version
 
-<video src="docs/demo2.mov" controls="controls" style="max-width: 730px;"></video>
+
+
+https://user-images.githubusercontent.com/1232405/205486972-cc62bc20-ab85-42e6-83a0-16ddfcd28c88.mov
+
+
 
 After asking it to improve the visual look
 
