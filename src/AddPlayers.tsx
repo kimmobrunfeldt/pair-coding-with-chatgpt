@@ -7,39 +7,27 @@ interface AddPlayersProps {
 
 const AddPlayers: React.FunctionComponent<AddPlayersProps> = (props) => {
   const [playerName, setPlayerName] = React.useState("");
-  const [showNamePrompt, setShowNamePrompt] = React.useState(false);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPlayerName(event.target.value);
+  const handleNameChange = (playerName: string) => {
+    setPlayerName(playerName);
   };
 
   const handleAddPlayer = () => {
     props.onAddPlayer(playerName);
     setPlayerName("");
-    setShowNamePrompt(false);
-  };
-
-  const handleShowNamePrompt = () => {
-    setShowNamePrompt(true);
-  };
-
-  const handleHideNamePrompt = () => {
-    setShowNamePrompt(false);
   };
 
   return (
     <div>
-      {showNamePrompt && (
-        <NamePrompt
-          value={playerName}
-          onChange={handleChange}
-          onSubmit={handleAddPlayer}
-          onCancel={handleHideNamePrompt}
-        />
-      )}
-      {!showNamePrompt && (
-        <button onClick={handleShowNamePrompt}>Add Player</button>
-      )}
+      <NamePrompt
+        initialName={playerName}
+        onNameChange={handleNameChange}
+      />
+      <button onClick={handleAddPlayer} disabled={!playerName}>
+        Add Player
+      </button>
     </div>
   );
 };
+
+export default AddPlayers

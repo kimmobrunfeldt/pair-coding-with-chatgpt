@@ -1,70 +1,52 @@
-import React, { useState } from 'react';
-import AddPlayers, { PlayerList } from './AddPlayers';
+import * as React from "react";
+import AddPlayers from "./AddPlayers";
 
-// Define the type for the game state
-type GameState = 'lobby' | 'playing';
+import "./App.css";
+import Game from "./Game";
 
-// Define the type for the menu input state
-type MenuInputState = 'addPlayers' | 'startGame';
-
-// Define the props for the App component
-interface AppProps {
-  // The initial value of the game state
-  initialGameState: GameState;
+interface AppState {
+  gameState: "menu" | "started";
+  players: string[];
 }
 
-export default function App(props: AppProps) {
-  // Declare a new state variable for the game state, with an initial value of 'lobby'
-  const [gameState, setGameState] = useState<GameState>(props.initialGameState);
-  // Declare a new state variable for the menu input state, with an initial value of 'addPlayers'
-  const [menuInputState, setMenuInputState] = useState<MenuInputState>('addPlayers');
-  // Declare a new state variable for the player list, with an empty initial value
-  const [players, setPlayers] = useState<PlayerList>([]);
+class App extends React.Component<{}, AppState> {
+  state = {
+    gameState: "menu" as "menu" | "started",
+    players: [],
+  };
 
-  // This function is called when the menu input state changes
-  function handleMenuInputStateChange(menuInputState: MenuInputState) {
-    // Update the menu input state state variable
-    setMenuInputState(menuInputState);
-  }
+  handleAddPlayer = (playerName: string) => {
+    this.setState((prevState) => ({
+      players: [...prevState.players, playerName],
+    }));
+  };
 
-  // This function is called when the player list changes
-  function handlePlayerListChange(players: PlayerList) {
-    // Update the player list state variable
-    setPlayers(players);
-  }
+  handleStartGame = () => {
+    this.setState({ gameState: "started" });
+  };
 
-  // This function is called when the start game button is clicked
-  function handleStartGame() {
-    // Update the game state state variable
-    setGameState('playing');
+  render() {
+    const { gameState, players } = this.state;
+    return (
+      <div className="app-container">
+        <h1 className="game-title">Poker Game</h1>
+        {gameState === "menu" && (
+          <div className="menu-container">
+            <AddPlayers onAddPlayer={this.handleAddPlayer} />
+            <ul className="player-list">
+              {players.map((player) => (
+                <li key={player}>{player}</li>
+              ))}
+            </ul>
+            <button className="start-game-button" onClick={this.handleStartGame}>
+              Start Game
+            </button>
+          </div>
+        )}
+        {gameState === "started" && <Game players={players} />}
+      </div>
+    );
   }
-  return (
-    <div>
-      {gameState === 'lobby' && (
-        <div>
-          {menuInputState === 'addPlayers' && (
-            <AddPlayers
-              initialPlayers={players}
-              players={players}
-              onPlayerListChange={handlePlayerListChange}
-            />
-          )}
-          {menuInputState === 'startGame' && (
-            <button onClick={handleStartGame}>Start Game</button>
-          )}
-        </div>
-      )}
-      {gameState === 'playing' && (
-        <div>
-          <h1>Playing Poker</h1>
-          <p>Players:</p>
-          <ul>
-            {players.map((player, index) => (
-              <li key={index}>{player}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
-  );
 }
+
+export default App;
