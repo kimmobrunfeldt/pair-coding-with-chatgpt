@@ -1,46 +1,115 @@
-# Getting Started with Create React App
+# Pair coding with ChatGPT
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This was an attempt to create a poker game using ChatGPT. I didn't have any clear specs of the game in mind.
 
-## Available Scripts
+You can check the full conversion in [chat.pdf](chat.pdf). I also exported the page html as [chat.html](chat.html) but it didn't look very nice without extra effort (maybe someone has already created a tool that converts Thread div to a nice looking output?).
 
-In the project directory, you can run:
+### Learnings
 
-### `npm start`
+* It understood the text input incredibly well. I purposely wrote bad grammar and it almost always understood what I meant. Also typos weren't a problem. I referred to the earlier "NamePropmt" (typo) and it understood I was talking about the "NamePrompt" component.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* It didn't feel awkward to refer to things we chatted about previously
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+* Providing corrections to code worked well.
 
-### `npm test`
+* Combining pieces of code worked surprisingly well. It seemed to use the correct APIs and types of components it had created before.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* Iterating on aspects that touched the code widely was difficult, partly due to the limited maximum reply length.
 
-### `npm run build`
+* It got each card in the poker deck right. This would be super useful to e.g. write a strict union type of all the cards etc without doing manual tedious work.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Short summary
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+First version
 
-### `npm run eject`
+![](docs/demo1.mov)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Second version
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![](docs/demo2.mov)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+After asking it to improve the visual look
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![](docs/screenshot1.png)
 
-## Learn More
+![](docs/screenshot2.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+I asked
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+> do these changes to the css: center the header, make it the same color as start button, add whitespace between name label and input field, add margins between add players and start game buttons
+
+![](docs/screenshot3.png)
+
+
+After that it had got the main menu and player adding screens done. And we moved to the game itself.
+
+I just asked a vague:
+
+> now let's focus on the game itself. can you create a Game component which runs the poker game
+
+and it replied with a rough poker game component skeleton.
+
+> ok add all the poker deck cards initially to the deck and show the player cards as nicer components
+
+then it replied with a code that looked to be correctly initialising the deck:
+
+
+```typescript
+const deck: string[] = [
+  "A♠",
+  "2♠",
+  "3♠",
+  "4♠",
+  "5♠",
+  "6♠",
+  "7♠",
+  "8♠",
+  "9♠",
+  "10♠",
+  "J♠",
+  "Q♠",
+  "K♠",
+  "A♥",
+  "2♥",
+  "3♥",
+  "4♥",
+  "5♥",
+  "6♥",
+  "7♥",
+  "8♥",
+  "9♥",
+  "10♥",
+  "J♥",
+  "Q♥",
+  "K♥",
+  "A♣",
+  "2♣",
+  "3♣",
+  "4♣",
+  "5♣",
+  "6♣",
+  "7♣",
+  "8♣",
+  "9♣",
+  "10♣",
+  "J♣",
+  "Q♣",
+  "K♣",
+  "A♦",
+  "2♦",
+  "3♦",
+  "4♦",
+  "5♦",
+  "6♦",
+  "7♦",
+  "8♦",
+  "9♦",
+  "10♦",
+  "J♦",
+  "Q♦",
+  "K♦",
+];
+```
+
+but the code was too long to output.
