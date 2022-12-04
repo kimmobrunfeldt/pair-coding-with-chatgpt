@@ -1,41 +1,45 @@
-import React from 'react';
-import NamePrompt from './NamePrompt';
+import * as React from "react";
+import NamePrompt from "./NamePrompt";
 
-// Define the type for the name state variable
-export type NameState = string;
-
-// Define the type for the player list
-export type PlayerList = NameState[];
-
-// Define the props for the AddPlayers component
 interface AddPlayersProps {
-  // The initial value of the player list
-  initialPlayers: PlayerList;
-  // The current value of the player list
-  players: PlayerList;
-  // The callback function to call when the player list changes
-  onPlayerListChange: (players: PlayerList) => void;
+  onAddPlayer: (playerName: string) => void;
 }
 
-// Define the event type for the input field
-interface ChangeEvent extends React.ChangeEvent<HTMLInputElement> {}
+const AddPlayers: React.FunctionComponent<AddPlayersProps> = (props) => {
+  const [playerName, setPlayerName] = React.useState("");
+  const [showNamePrompt, setShowNamePrompt] = React.useState(false);
 
-export default function AddPlayers(props: AddPlayersProps) {
-  // This function is called when the name changes
-  function handleNameChange(name: NameState) {
-    // Update the player list state variable with the current input value
-    props.onPlayerListChange([...props.players, name]);
-  }
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPlayerName(event.target.value);
+  };
+
+  const handleAddPlayer = () => {
+    props.onAddPlayer(playerName);
+    setPlayerName("");
+    setShowNamePrompt(false);
+  };
+
+  const handleShowNamePrompt = () => {
+    setShowNamePrompt(true);
+  };
+
+  const handleHideNamePrompt = () => {
+    setShowNamePrompt(false);
+  };
 
   return (
     <div>
-      <h1>Add Players</h1>
-      <NamePrompt initialName="" onNameChange={handleNameChange} />
-      <ul>
-        {props.players.map((player, index) => (
-          <li key={index}>{player}</li>
-        ))}
-      </ul>
+      {showNamePrompt && (
+        <NamePrompt
+          value={playerName}
+          onChange={handleChange}
+          onSubmit={handleAddPlayer}
+          onCancel={handleHideNamePrompt}
+        />
+      )}
+      {!showNamePrompt && (
+        <button onClick={handleShowNamePrompt}>Add Player</button>
+      )}
     </div>
   );
-}
+};
