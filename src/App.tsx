@@ -1,70 +1,26 @@
-import React, { useState } from 'react';
-import AddPlayers, { PlayerList } from './AddPlayers';
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
 
-// Define the type for the game state
-type GameState = 'lobby' | 'playing';
-
-// Define the type for the menu input state
-type MenuInputState = 'addPlayers' | 'startGame';
-
-// Define the props for the App component
-interface AppProps {
-  // The initial value of the game state
-  initialGameState: GameState;
-}
-
-function App(props: AppProps) {
-  // Declare a new state variable for the game state, with an initial value of 'lobby'
-  const [gameState, setGameState] = useState<GameState>(props.initialGameState);
-  // Declare a new state variable for the menu input state, with an initial value of 'addPlayers'
-  const [menuInputState, setMenuInputState] = useState<MenuInputState>('addPlayers');
-  // Declare a new state variable for the player list, with an empty initial value
-  const [players, setPlayers] = useState<PlayerList>([]);
-
-  // This function is called when the menu input state changes
-  function handleMenuInputStateChange(menuInputState: MenuInputState) {
-    // Update the menu input state state variable
-    setMenuInputState(menuInputState);
-  }
-
-  // This function is called when the player list changes
-  function handlePlayerListChange(players: PlayerList) {
-    // Update the player list state variable
-    setPlayers(players);
-  }
-
-  // This function is called when the start game button is clicked
-  function handleStartGame() {
-    // Update the game state state variable
-    setGameState('playing');
-  }
+function App() {
   return (
-    <div>
-      {gameState === 'lobby' && (
-        <div>
-          {menuInputState === 'addPlayers' && (
-            <AddPlayers
-              initialPlayers={players}
-              players={players}
-              onPlayerListChange={handlePlayerListChange}
-            />
-          )}
-          {menuInputState === 'startGame' && (
-            <button onClick={handleStartGame}>Start Game</button>
-          )}
-        </div>
-      )}
-      {gameState === 'playing' && (
-        <div>
-          <h1>Playing Poker</h1>
-          <p>Players:</p>
-          <ul>
-            {players.map((player, index) => (
-              <li key={index}>{player}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.tsx</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
     </div>
   );
 }
+
+export default App;
