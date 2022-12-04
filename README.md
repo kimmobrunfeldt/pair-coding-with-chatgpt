@@ -23,11 +23,11 @@ You can check the full conversion in [chat.pdf](chat.pdf). I also exported the p
 
 First version
 
-![](docs/demo1.mov)
+<video src="docs/demo1.mov" controls="controls" style="max-width: 730px;"></video>
 
 Second version
 
-![](docs/demo2.mov)
+<video src="docs/demo2.mov" controls="controls" style="max-width: 730px;"></video>
 
 After asking it to improve the visual look
 
